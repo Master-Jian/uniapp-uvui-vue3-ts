@@ -1,0 +1,7 @@
+// 引入公共基础类
+@use"./libs/css/common.scss";
+
+// 非nvue的样式
+/* #ifndef APP-NVUE */
+@use"./libs/css/vue.scss";
+/* #endif */

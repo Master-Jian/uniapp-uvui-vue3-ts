@@ -1,0 +1,5 @@
+{
+    "i18n-ally.localesPaths": [
+        "src/uni_modules/uv-calendars/components/uv-calendars/i18n"
+    ]
+}
