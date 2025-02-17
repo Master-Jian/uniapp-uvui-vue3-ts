@@ -14,7 +14,7 @@
       }
     },
     {
-      "path": "pages/my/index",
+      "path": "pages/login/index",
       "style": {
         "navigationBarTitleText": "",
         "backgroundColor": "#f3f3f3",
@@ -27,7 +27,7 @@
       }
     },
     {
-      "path": "pages/login/index",
+      "path": "pages/my/index",
       "style": {
         "navigationBarTitleText": "我的"
       }
