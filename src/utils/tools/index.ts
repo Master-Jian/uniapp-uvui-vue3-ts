@@ -1,4 +1,4 @@
-import { useGoodsStore } from '@/store/modules/goods'
+import { useAppStore } from "@/store/modules/app"
 
 /**
  * 深拷贝
@@ -96,7 +96,7 @@ export function copy(message: string) {
 export function handleRouteQueryAlipay(options: any) {
   try {
     if (options?.path && options?.path.indexOf('goods/goods') != -1) {
-      const goodsStore = useGoodsStore()
+      const appStore = useAppStore()
       const query = String(options?.query?.qrCode || '')
       if (query) {
         // 支付宝传参里有个type,最好不要冲突
@@ -109,7 +109,7 @@ export function handleRouteQueryAlipay(options: any) {
             const value = v.split('=')
             obj[value[0]] = value[1]
           })
-          goodsStore.setGoodsParmas(obj)
+          appStore.setAlipayParmas(obj)
         }
       }
     }
@@ -151,9 +151,9 @@ export function handleRouteQueryWeiXin(props: any) {
 export function handleRouteQuery(props: any) {
   try {
     // 支付宝
-    const goodsParams = useGoodsStore().getGoodsParmas
-    if (goodsParams && goodsParams?.id) {
-      return goodsParams
+    const alipayParams = useAppStore().getAliapyParmas
+    if (alipayParams && alipayParams?.id) {
+      return alipayParams
     }
     // 微信
     return handleRouteQueryWeiXin(props)

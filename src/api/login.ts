@@ -47,7 +47,7 @@ export const setLoginCodeApi = (data: LoginCodeParams) => {
 export const getWeChatCodeApi = (data: WeChatParams) => {
   return defHttp<WeChatResult>({
     method: 'GET',
-    url: '/onekey/codeWeChat',
+    url: '/applet/codeWeChat',
     data,
   })
 }

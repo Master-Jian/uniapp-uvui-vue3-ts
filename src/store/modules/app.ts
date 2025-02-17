@@ -1,10 +1,15 @@
 import { defineStore } from 'pinia'
 import { store } from '@/store'
 
+type paramsType = {
+  id: string
+}
+
 interface AppState {
   statusBarHeight: number
   menuButton: Nullable<UniNamespace.GetMenuButtonBoundingClientRectRes>
   environment?: string
+  alipayParams?: paramsType
 }
 // 定义 Store
 export const useAppStore = defineStore('app', {
@@ -25,6 +30,12 @@ export const useAppStore = defineStore('app', {
      */
     getMenuButton(): UniNamespace.GetMenuButtonBoundingClientRectRes {
       return this.menuButton || uni.getMenuButtonBoundingClientRect()
+    }, 
+    /**
+     * 获取 支付宝扫码解析后的参数
+     */
+    getAliapyParmas(): paramsType {
+      return this.alipayParams || { id: '' }
     },
   },
   actions: {
@@ -33,6 +44,9 @@ export const useAppStore = defineStore('app', {
     },
     setMenuButton(info: UniNamespace.GetMenuButtonBoundingClientRectRes) {
       this.menuButton = info
+    },
+    setAlipayParmas(info: paramsType) {
+      this.alipayParams = info || undefined
     },
   },
 })

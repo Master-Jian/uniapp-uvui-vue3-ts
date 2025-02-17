@@ -14,15 +14,22 @@
       }
     },
     {
-      "path": "pages/login/index",
+      "path": "pages/my/index",
       "style": {
-        "navigationBarTitleText": "登录",
-        "navigationBarTextStyle": "white",
+        "navigationBarTitleText": "",
+        "backgroundColor": "#f3f3f3",
         "navigationStyle": "custom",
+        "enablePullDownRefresh": true,
         "mp-alipay": {
           "transparentTitle": "always",
           "titlePenetrate": "YES"
         }
+      }
+    },
+    {
+      "path": "pages/login/index",
+      "style": {
+        "navigationBarTitleText": "我的"
       }
     },
     {
@@ -36,7 +43,7 @@
       "style": {
         "navigationBarTitleText": ""
       }
-    },
+    }
   ],
   "subPackages": [
     {
@@ -58,7 +65,7 @@
           }
         }
       ]
-    },
+    }
   ],
   "globalStyle": {
     "navigationBarTextStyle": "black",
