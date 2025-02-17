@@ -1,103 +1,103 @@
 <template>
   <view class="login">
     <uv-popup ref="popup" mode="bottom" :closeOnClickOverlay="false" :round="16">
-      <view class="box">
-        <image @tap="handleBack" class="closeImg" :src="closeIcon" />
+    <view class="box">
+      <image @tap="handleBack" class="closeImg" :src="closeIcon" />
 
-        <image class="logo" style="background-color: gray;" src="" />
-        <text class="title">name</text>
+      <image class="logo" style="background-color: gray" src="" />
+      <text class="title">appName</text>
 
-        <view class="form" v-if="method == 'codeLogin'">
-          <uv-input
-            border="none"
-            fontSize="16px"
-            v-model="mobile"
-            maxlength="11"
-            placeholder="请输入您的手机号码"
-            :customStyle="{
-              backgroundColor: '#F5F6FA',
-              borderRadius: '88rpx',
-              width: '654rpx',
-            }"
-          >
-            <template v-slot:prefix>
-              <image class="icon" :src="phoneIcon" />
-            </template>
-          </uv-input>
-          <uv-input
-            border="none"
-            fontSize="16px"
-            type="number"
-            v-model="code"
-            maxlength="6"
-            placeholder="请输入验证码"
-            :customStyle="{
-              marginTop: '40rpx',
-              backgroundColor: '#F5F6FA',
-              borderRadius: '88rpx',
-              width: '654rpx',
-            }"
-          >
-            <template v-slot:prefix>
-              <image class="icon" :src="codeIcon" />
-            </template>
-            <template v-slot:suffix>
-              <uv-code ref="uCode" @change="codeChange" seconds="60" changeText="X秒重新获取" />
-              <view class="uCodeButton">
-                <text
-                  class="txt"
-                  :style="{ color: ['获取验证码', '重新获取'].includes(tips) ? '#4e85f6' : '#999' }"
-                  @tap="handleCodeChange"
-                >
-                  {{ tips }}
-                </text>
-              </view>
-            </template>
-          </uv-input>
-        </view>
-
-        <button v-if="!agree || method == 'codeLogin'" class="submit" @tap="handleSubmit">
-          <text class="txt" v-if="method == 'oneLogin'">手机号一键登录</text>
-          <text class="txt" v-else-if="method == 'codeLogin'">登录</text>
-        </button>
-        <!-- #ifdef MP-WEIXIN -->
-        <button
-          v-else-if="agree && method == 'oneLogin'"
-          class="submit"
-          open-type="getPhoneNumber"
-          @getphonenumber="getPhoneNumber"
+      <view class="form" v-if="method == 'codeLogin'">
+        <uv-input
+          border="none"
+          fontSize="16px"
+          v-model="mobile"
+          maxlength="11"
+          placeholder="请输入您的手机号码"
+          :customStyle="{
+            backgroundColor: '#F5F6FA',
+            borderRadius: '88rpx',
+            width: '654rpx',
+          }"
         >
-          <text class="txt">手机号一键登录</text>
-        </button>
-        <!-- #endif -->
-
-        <!-- #ifdef MP-ALIPAY -->
-        <button
-          v-else-if="agree && method == 'oneLogin'"
-          class="submit"
-          open-type="getPhoneNumber"
-          @getphonenumber="getPhoneNumber"
+          <template v-slot:prefix>
+            <image class="icon" :src="phoneIcon" />
+          </template>
+        </uv-input>
+        <uv-input
+          border="none"
+          fontSize="16px"
+          type="number"
+          v-model="code"
+          maxlength="6"
+          placeholder="请输入验证码"
+          :customStyle="{
+            marginTop: '40rpx',
+            backgroundColor: '#F5F6FA',
+            borderRadius: '88rpx',
+            width: '654rpx',
+          }"
         >
-          <text class="txt">手机号一键登录</text>
-        </button>
-        <!-- #endif -->
-
-        <view class="agree" @tap="handleAgree">
-          <image v-if="agree" class="icon" :src="selectIcon" />
-          <image v-else class="icon" :src="unSelectIcon" />
-          <text class="txt">已阅读并同意</text>
-          <text class="txt atxt" @tap.stop="toAgreement(11)">《注册协议》</text>
-          <text class="txt">和</text>
-          <text class="txt atxt" @tap.stop="toAgreement(10)">《隐私协议》</text>
-        </view>
-        <view class="currentTxt" v-if="method == 'oneLogin'" @tap="handleCurrent('codeLogin')">
-          <text class="txt">验证码登录</text>
-        </view>
-        <view class="currentTxt" v-if="method == 'codeLogin'" @tap="handleCurrent('oneLogin')">
-          <text class="txt">手机号一键登录</text>
-        </view>
+          <template v-slot:prefix>
+            <image class="icon" :src="codeIcon" />
+          </template>
+          <template v-slot:suffix>
+            <uv-code ref="uCode" @change="codeChange" seconds="60" changeText="X秒重新获取" />
+            <view class="uCodeButton">
+              <text
+                class="txt"
+                :style="{ color: ['获取验证码', '重新获取'].includes(tips) ? '#4e85f6' : '#999' }"
+                @tap="handleCodeChange"
+              >
+                {{ tips }}
+              </text>
+            </view>
+          </template>
+        </uv-input>
       </view>
-    </uv-popup>
+
+      <button v-if="!agree || method == 'codeLogin'" class="submit" @tap="handleSubmit">
+        <text class="txt" v-if="method == 'oneLogin'">手机号一键登录</text>
+        <text class="txt" v-else-if="method == 'codeLogin'">登录</text>
+      </button>
+      <!-- #ifdef MP-WEIXIN -->
+      <button
+        v-else-if="agree && method == 'oneLogin'"
+        class="submit"
+        open-type="getPhoneNumber"
+        @getphonenumber="getPhoneNumber"
+      >
+        <text class="txt">手机号一键登录</text>
+      </button>
+      <!-- #endif -->
+
+      <!-- #ifdef MP-ALIPAY -->
+      <button
+        v-else-if="agree && method == 'oneLogin'"
+        class="submit"
+        open-type="getPhoneNumber"
+        @getphonenumber="getPhoneNumber"
+      >
+        <text class="txt">手机号一键登录</text>
+      </button>
+      <!-- #endif -->
+
+      <view class="agree" @tap="handleAgree">
+        <image v-if="agree" class="icon" :src="selectIcon" />
+        <image v-else class="icon" :src="unSelectIcon" />
+        <text class="txt">已阅读并同意</text>
+        <text class="txt atxt" @tap.stop="toAgreement(11)">《注册协议》</text>
+        <text class="txt">和</text>
+        <text class="txt atxt" @tap.stop="toAgreement(10)">《隐私协议》</text>
+      </view>
+      <view class="currentTxt" v-if="method == 'oneLogin'" @tap="handleCurrent('codeLogin')">
+        <text class="txt">验证码登录</text>
+      </view>
+      <view class="currentTxt" v-if="method == 'codeLogin'" @tap="handleCurrent('oneLogin')">
+        <text class="txt">手机号一键登录</text>
+      </view>
+    </view>
+  </uv-popup>
 
     <uv-modal ref="uModal" @confirm="getCode">
       <div class="uModal">
@@ -113,18 +113,23 @@
     getAlipayCodeApi,
     getLoginCodeApi,
     getLoginCodeCheckApi,
-    getWeiXinCodeApi,
+    getWeChatCodeApi,
     setLoginCodeApi,
     setLoginOhterCode,
   } from '@/api/login'
   import { getUserInfoApi } from '@/api/user'
-  import { useOrderStore } from '@/store/modules/order'
   import { useUserStore } from '@/store/modules/user'
-  import { closeIcon, codeIcon, phoneIcon, selectIcon, unSelectIcon } from '@/utils/icon/login/login'
+  import {
+    closeIcon,
+    codeIcon,
+    phoneIcon,
+    selectIcon,
+    unSelectIcon,
+  } from '@/utils/icon/login/login'
   import { richParamsToEncodeURIComponent } from '@/utils/tools'
   import { onLoad, onShow, onUnload } from '@dcloudio/uni-app'
   import { onMounted, ref } from 'vue'
-  
+
   const popup = ref<any>()
   const agree = ref<boolean>(false)
   // oneLogin.一键登录  codeLogin.验证码登录
@@ -246,7 +251,6 @@
       setLoginCodeApi({ loginName: mobile.value, code: code.value }).then((res) => {
         const userStore = useUserStore()
         userStore.setToken(res.token)
-        userStore.setNewUser(res.newUser)
         uni.showToast({ title: '登录成功', icon: 'none' })
         // 获取当前页面栈
         let pages = getCurrentPages()
@@ -255,7 +259,6 @@
         // 如果有上级页面则返回，否则跳转 首页
         timeOunt.value = setTimeout(() => {
           if (prevPage) {
-            useOrderStore().setRefresh(true)
             uni.navigateBack()
           } else {
             uni.switchTab({ url: '/pages/index/index' })
@@ -270,7 +273,7 @@
    */
   function getPhoneNumber(e: any) {
     // #ifdef MP-WEIXIN
-    getWeiXinCodeApi({ code: e.detail.code }).then((res) => {
+    getWeChatCodeApi({ code: e.detail.code }).then((res) => {
       if (res?.phoneNumber) {
         mobile.value = res.phoneNumber
         handleOtherLogin()
@@ -308,7 +311,6 @@
     setLoginOhterCode({ loginName: mobile.value }).then((res) => {
       const userStore = useUserStore()
       userStore.setToken(res.token)
-      userStore.setNewUser(res.newUser)
       uni.showToast({ title: '登录成功', icon: 'none' })
 
       getUserInfoApi().then((res) => {
@@ -322,7 +324,6 @@
       // 如果有上级页面则返回，否则跳转 首页
       timeOunt.value = setTimeout(() => {
         if (prevPage) {
-          useOrderStore().setRefresh(true)
           uni.navigateBack()
         } else {
           uni.switchTab({ url: '/pages/index/index' })
